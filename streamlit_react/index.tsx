@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import ApiKeyManager from './ApiKeyManager';
+import TokenTable from './TokenTable.tsx';
+import { Streamlit } from "streamlit-component-lib";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApiKeyManager />
+    <TokenTable />
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+Streamlit.setComponentReady();
+

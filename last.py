@@ -4,6 +4,10 @@ import mock_token_service as mts
 from testo import st_token_table
 
 # Initialize session state keys if they don't exist
+if "show_basic_key" not in st.session_state:
+    st.session_state["show_basic_key"] = True
+
+# Initialize session state keys if they don't exist
 if "show_add_key_form" not in st.session_state:
     st.session_state["show_add_key_form"] = False
 
@@ -12,6 +16,9 @@ if "show_success_message" not in st.session_state:
 
 if "success_message" not in st.session_state:
     st.session_state["success_message"] = ""
+
+if "show_table" not in st.session_state:
+    st.session_state["show_table"] = True
 
 
 # Function to reset the success message and related state variables
@@ -22,11 +29,14 @@ def reset_success_state():
     st.rerun()
 
 
-# Button to show the form for adding a new key
-if st.button(
-    "Create new secret key", disabled=st.session_state["show_success_message"]
-):
-    st.session_state["show_add_key_form"] = True
+if st.session_state["show_basic_key"]:
+    # Button to show the form for adding a new key
+    if st.button("Create new secret key"):
+        st.session_state["show_add_key_form"] = True
+        st.session_state["show_basic_key"] = False
+        st.session_state["show_table"] = False
+        st.rerun()
+
 
 # The form for adding a new key
 if st.session_state["show_add_key_form"]:
@@ -36,8 +46,10 @@ if st.session_state["show_add_key_form"]:
             placeholder="Enter the key name",
             disabled=st.session_state["show_success_message"],
         )
+
         submit_button = st.form_submit_button(
-            label="Create secret key", disabled=st.session_state["show_success_message"]
+            label="Create secret key",
+            disabled=st.session_state["show_success_message"],
         )
 
         if submit_button:
@@ -48,57 +60,67 @@ if st.session_state["show_add_key_form"]:
                     "success_message"
                 ] = f"New secret key created successfully! Key: {new_token['key']}"
                 st.session_state["show_success_message"] = True
+                st.session_state["show_add_key_form"] = False
+                st.rerun()
             else:
                 st.warning("Please enter a name for the key.")
 
 # Show a success message if a new key was added
 if st.session_state["show_success_message"]:
-    st.success(st.session_state["success_message"])
+    st.session_state["show_add_key_form"] = False
+    st.session_state["show_basic_key"] = True
+    container = st.container(border=True)
+    container.write(
+        "Please save this secret key somewhere safe and accessible. For security reasons, you won't be able to view it again through your OpenAI account. If you lose this secret key, you'll need to generate a new one."
+    )
+    container.success(st.session_state["success_message"])
+    st.session_state["show_table"] = True
     # 'OK' button to reset the success state
     if st.button("OK"):
         reset_success_state()
 
-# Display the keys in the table with the hashed version
-rendered_tokens = st_token_table(
-    tokens=[
-        {
-            **token,
-            "key": hashlib.sha256(token["key"].encode()).hexdigest()[:8],
-        }  # Hash the key
-        for token in mts.get_tokens()
-    ],
-    key="token_table",
-)
+if st.session_state["show_table"]:
+    # Display the keys in the table with the hashed version
+    rendered_tokens = st_token_table(
+        tokens=[
+            {
+                **token,
+                "key": hashlib.sha256(token["key"].encode()).hexdigest()[:8],
+            }  # Hash the key
+            for token in mts.get_tokens()
+        ],
+        key="token_table",
+    )
 
-# Check for updates from the React component
-if rendered_tokens is not None:
-    needs_rerun = False
+    # Check for updates from the React component
+    if rendered_tokens is not None:
+        needs_rerun = False
 
-    for rendered_token in rendered_tokens:
-        # Find the full_key in the mock DB using the display_key
-        current_token = next(
-            (
-                t
-                for t in mts.get_tokens()
-                if hashlib.sha256(t["key"].encode()).hexdigest()[:8]
-                == rendered_token["display_key"]
-            ),
-            None,
-        )
+        for rendered_token in rendered_tokens:
+            # Find the full_key in the mock DB using the display_key
+            current_token = next(
+                (
+                    t
+                    for t in mts.get_tokens()
+                    if hashlib.sha256(t["key"].encode()).hexdigest()[:8]
+                    == rendered_token["display_key"]
+                ),
+                None,
+            )
 
-        if current_token:
-            # If the token should be deactivated
-            if not rendered_token["is_active"] and current_token["is_active"]:
-                mts.remove_token(current_token["key"])  # Use the full key here
-                needs_rerun = True
-            # If the token's name should be changed
-            elif rendered_token["name"] != current_token["name"]:
-                mts.update_token_name(
-                    current_token["key"], rendered_token["name"]
-                )  # Use the full key here
-                needs_rerun = True
+            if current_token:
+                # If the token should be deactivated
+                if not rendered_token["is_active"] and current_token["is_active"]:
+                    mts.remove_token(current_token["key"])  # Use the full key here
+                    needs_rerun = True
+                # If the token's name should be changed
+                elif rendered_token["name"] != current_token["name"]:
+                    mts.update_token_name(
+                        current_token["key"], rendered_token["name"]
+                    )  # Use the full key here
+                    needs_rerun = True
 
-    if needs_rerun:
-        st.experimental_rerun()
+        if needs_rerun:
+            st.experimental_rerun()
 
-print("Current tokens in mock DB:", mts._token_db)
+    print("Current tokens in mock DB:", mts._token_db)

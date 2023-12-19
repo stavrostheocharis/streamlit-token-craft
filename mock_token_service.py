@@ -1,4 +1,5 @@
 import uuid
+from datetime import date
 
 # Simulated database (in-memory for this example)
 _token_db = []
@@ -29,7 +30,7 @@ def add_token(name="New Token"):
         "key": full_key,  # Store the full key
         "display_key": formated_key,  # Store the formated version for display
         "name": name,
-        "dateCreated": "2023-12-18",
+        "dateCreated": str(date.today()),
         "lastUsed": "Never",
         "is_active": True,
     }

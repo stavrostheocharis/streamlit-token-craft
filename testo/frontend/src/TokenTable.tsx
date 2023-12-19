@@ -47,19 +47,18 @@ interface Token {
   name: string;
   dateCreated: string;
   lastUsed: string;
-  is_active: boolean; // This should be added if you are tracking active status
+  is_active: boolean;
 }
 
 interface TokenTableProps extends ComponentProps {
   args: {
     tokens: Token[];
-    columnHelpText?: { [key: string]: string }; // Optional help text for columns
   };
 }
 
 const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
+  const [pendingDeletion, setPendingDeletion] = useState<string | null>(null);
   const [tokenList, setTokenList] = useState<Token[]>(args.tokens || []);
-  const { columnHelpText } = args; // Destructure the optional columnHelpText
 
   useEffect(() => {
     setTokenList(args.tokens || []);
@@ -69,14 +68,23 @@ const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
     Streamlit.setFrameHeight();
   });
 
-  const handleDelete = (key: string) => {
-    // Logic here needs to match with your backend deletion logic
-    // This is just a placeholder for the actual delete functionality
-    const updatedTokens = tokenList.map(token =>
-      token.key === key ? { ...token, is_active: false } : token
-    );
-    setTokenList(updatedTokens);
-    Streamlit.setComponentValue(updatedTokens);
+  const handleDeleteClick = (key: string) => {
+    setPendingDeletion(key);
+  };
+
+  const confirmDelete = () => {
+    if (pendingDeletion) {
+      const updatedTokens = tokenList.map(token =>
+        token.key === pendingDeletion ? { ...token, is_active: false } : token
+      );
+      setTokenList(updatedTokens);
+      Streamlit.setComponentValue(updatedTokens);
+      setPendingDeletion(null);
+    }
+  };
+
+  const cancelDelete = () => {
+    setPendingDeletion(null);
   };
 
   const handleValueChange = (key: string, field: keyof Token, value: string) => {
@@ -87,33 +95,21 @@ const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
     Streamlit.setComponentValue(updatedTokens);
   };
 
-  // Helper function to render a table header with an optional tooltip
-  const renderTableHeader = (columnName: string, displayText: string) => (
-    <th>
-      {displayText}
-      {columnHelpText && columnHelpText[columnName] && (
-        <span title={columnHelpText[columnName]} className="header-help-icon">
-          ℹ️
-        </span>
-      )}
-    </th>
-  );
-
   return (
     <div className="token-table-container">
       <table className="token-table">
         <thead>
           <tr>
-            {renderTableHeader("name", "Name")}
-            {renderTableHeader("key", "Key")}
-            {renderTableHeader("dateCreated", "Date Created")}
-            {renderTableHeader("lastUsed", "Last Used")}
+            <th>Name</th>
+            <th>Key</th>
+            <th>Date Created</th>
+            <th>Last Used</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {tokenList.map(token => (
-            <tr key={token.key}>
+          {tokenList.map((token, index) => (
+            <tr key={index}>
               <EditableCell
                 value={token.name}
                 onValueChange={(value) => handleValueChange(token.key, 'name', value)}
@@ -122,9 +118,20 @@ const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
               <td>{token.dateCreated}</td>
               <td>{token.lastUsed}</td>
               <td>
-                <button onClick={() => handleDelete(token.key)} className="delete-button">
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
+                {pendingDeletion === token.key ? (
+                  <>
+                    <button onClick={confirmDelete} className="confirm-delete-button">
+                      Confirm Revoke
+                    </button>
+                    <button onClick={cancelDelete} className="cancel-button">
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <button onClick={() => handleDeleteClick(token.key)} className="delete-button">
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                )}
               </td>
             </tr>
           ))}

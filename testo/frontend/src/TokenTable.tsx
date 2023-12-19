@@ -14,9 +14,16 @@ const EditableCell: React.FC<EditableCellProps> = ({ value, onValueChange }) => 
   const [isEditing, setEditing] = useState(false);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && editValue.length <= 18) {
       onValueChange(editValue);
       setEditing(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    if (newValue.length <= 18) {
+      setEditValue(newValue);
     }
   };
 
@@ -30,7 +37,7 @@ const EditableCell: React.FC<EditableCellProps> = ({ value, onValueChange }) => 
         <input
           type="text"
           value={editValue}
-          onChange={(e) => setEditValue(e.target.value)}
+          onChange={handleChange}
           onBlur={() => setEditing(false)}
           onKeyDown={handleKeyDown}
           autoFocus

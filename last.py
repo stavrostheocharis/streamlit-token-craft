@@ -47,6 +47,7 @@ if st.session_state["show_add_key_form"]:
             "Name",
             placeholder="Enter the key name",
             disabled=st.session_state["show_success_message"],
+            max_chars=18,
         )
 
         col1, col2 = st.columns([3, 10])

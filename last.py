@@ -1,5 +1,4 @@
 import streamlit as st
-import hashlib
 import mock_token_service as mts
 from testo import st_token_table
 
@@ -71,7 +70,7 @@ if st.session_state["show_success_message"]:
     st.session_state["show_basic_key"] = True
     container = st.container(border=True)
     container.write(
-        "Please save this secret key somewhere safe and accessible. For security reasons, you won't be able to view it again through your OpenAI account. If you lose this secret key, you'll need to generate a new one."
+        "Stash this secret key in a super safe yet reachable hidey-hole! It's like a one-off magic ticket – once gone from here, it's gone for good. Lose it, and you're off to the wizarding world of making a new one! 🗝️✨🧙‍♂️"
     )
     container.success(st.session_state["success_message"])
     st.session_state["show_table"] = True
@@ -82,13 +81,7 @@ if st.session_state["show_success_message"]:
 if st.session_state["show_table"]:
     # Display the keys in the table with the hashed version
     rendered_tokens = st_token_table(
-        tokens=[
-            {
-                **token,
-                "key": hashlib.sha256(token["key"].encode()).hexdigest()[:8],
-            }  # Hash the key
-            for token in mts.get_tokens()
-        ],
+        tokens=mts.get_tokens(),
         key="token_table",
     )
 
@@ -97,14 +90,8 @@ if st.session_state["show_table"]:
         needs_rerun = False
 
         for rendered_token in rendered_tokens:
-            # Find the full_key in the mock DB using the display_key
             current_token = next(
-                (
-                    t
-                    for t in mts.get_tokens()
-                    if hashlib.sha256(t["key"].encode()).hexdigest()[:8]
-                    == rendered_token["display_key"]
-                ),
+                (t for t in mts._token_db if t["display_key"] == rendered_token["key"]),
                 None,
             )
 
@@ -121,6 +108,6 @@ if st.session_state["show_table"]:
                     needs_rerun = True
 
         if needs_rerun:
-            st.experimental_rerun()
+            st.rerun()
 
     print("Current tokens in mock DB:", mts._token_db)

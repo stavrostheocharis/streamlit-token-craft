@@ -3,38 +3,41 @@ import mock_token_service as mts
 from testo import st_token_table
 
 # Initialize session state keys if they don't exist
-if "show_basic_key" not in st.session_state:
-    st.session_state["show_basic_key"] = True
-
-# Initialize session state keys if they don't exist
-if "show_add_key_form" not in st.session_state:
-    st.session_state["show_add_key_form"] = False
-
-if "show_success_message" not in st.session_state:
-    st.session_state["show_success_message"] = False
-
-if "success_message" not in st.session_state:
-    st.session_state["success_message"] = ""
-
-if "show_table" not in st.session_state:
-    st.session_state["show_table"] = True
+for key in [
+    "show_basic_key",
+    "show_add_key_form",
+    "show_success_message",
+    "success_message",
+    "show_table",
+]:
+    if key not in st.session_state:
+        st.session_state[key] = (
+            True if key in ["show_basic_key", "show_table"] else False
+        )
 
 
 # Function to reset the success message and related state variables
-def reset_success_state():
-    st.session_state["show_success_message"] = False
-    st.session_state["success_message"] = ""
-    st.session_state["show_add_key_form"] = False
+def reset_state(
+    show_basic_key=True,
+    show_add_key_form=False,
+    show_success_message=False,
+    show_table=True,
+):
+    st.session_state.update(
+        {
+            "show_basic_key": show_basic_key,
+            "show_add_key_form": show_add_key_form,
+            "show_success_message": show_success_message,
+            "show_table": show_table,
+        }
+    )
     st.rerun()
 
 
 if st.session_state["show_basic_key"]:
     # Button to show the form for adding a new key
     if st.button("Create new secret key"):
-        st.session_state["show_add_key_form"] = True
-        st.session_state["show_basic_key"] = False
-        st.session_state["show_table"] = False
-        st.rerun()
+        reset_state(show_basic_key=False, show_add_key_form=True, show_table=False)
 
 
 # The form for adding a new key
@@ -46,10 +49,13 @@ if st.session_state["show_add_key_form"]:
             disabled=st.session_state["show_success_message"],
         )
 
-        submit_button = st.form_submit_button(
-            label="Create secret key",
-            disabled=st.session_state["show_success_message"],
-        )
+        col1, col2 = st.columns([3, 10])
+        with col1:
+            submit_button = st.form_submit_button(
+                label="Create secret key",
+            )
+        with col2:
+            cancel_button = st.form_submit_button(label="Cancel", type="primary")
 
         if submit_button:
             if new_key_name:  # Check if the name is not empty
@@ -58,16 +64,17 @@ if st.session_state["show_add_key_form"]:
                 st.session_state[
                     "success_message"
                 ] = f"New secret key created successfully! Key: {new_token['key']}"
-                st.session_state["show_success_message"] = True
-                st.session_state["show_add_key_form"] = False
-                st.rerun()
+                reset_state(show_success_message=True, show_add_key_form=False)
             else:
                 st.warning("Please enter a name for the key.")
+        elif cancel_button:
+            st.session_state["show_basic_key"] = True
+            reset_state()
+
 
 # Show a success message if a new key was added
 if st.session_state["show_success_message"]:
-    st.session_state["show_add_key_form"] = False
-    st.session_state["show_basic_key"] = True
+    reset_state(show_add_key_form=False, show_basic_key=True)
     container = st.container(border=True)
     container.write(
         "Stash this secret key in a super safe yet reachable hidey-hole! It's like a one-off magic ticket – once gone from here, it's gone for good. Lose it, and you're off to the wizarding world of making a new one! 🗝️✨🧙‍♂️"
@@ -76,8 +83,7 @@ if st.session_state["show_success_message"]:
 
     # 'OK' button to reset the success state
     if st.button("OK"):
-        st.session_state["show_table"] = True
-        reset_success_state()
+        reset_state()
 
 
 if st.session_state["show_table"]:

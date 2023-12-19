@@ -73,10 +73,12 @@ if st.session_state["show_success_message"]:
         "Stash this secret key in a super safe yet reachable hidey-hole! It's like a one-off magic ticket – once gone from here, it's gone for good. Lose it, and you're off to the wizarding world of making a new one! 🗝️✨🧙‍♂️"
     )
     container.success(st.session_state["success_message"])
-    st.session_state["show_table"] = True
+
     # 'OK' button to reset the success state
     if st.button("OK"):
+        st.session_state["show_table"] = True
         reset_success_state()
+
 
 if st.session_state["show_table"]:
     # Display the keys in the table with the hashed version

@@ -1,6 +1,6 @@
 import streamlit as st
 import mock_token_service as mts
-from testo import st_token_table
+from token_manager import st_token_table
 
 # Initialize session state keys if they don't exist
 for key in [

@@ -1,5 +1,5 @@
 import React from 'react';
-import TokenTable from './TokenTable.tsx';
+import TokenTable from './TokenTable';
 
 const App: React.FC = () => {
     return (

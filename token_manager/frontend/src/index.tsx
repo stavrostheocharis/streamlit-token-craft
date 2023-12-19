@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';  // Updated import for React 18
-import TokenTable from './TokenTable.tsx';  // Assuming the .tsx extension is resolved by your build setup
+import TokenTable from './TokenTable';  // Assuming the .tsx extension is resolved by your build setup
 import { Streamlit } from "streamlit-component-lib";
 
 // Create a root element for the React app

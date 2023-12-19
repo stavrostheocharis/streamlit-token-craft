@@ -1,0 +1,109 @@
+.token-table-container {
+  width: 100%; /* Adjust the width as needed */
+  overflow-x: auto; /* Allows horizontal scrolling if needed */
+}
+
+.token-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  /* Remove table-layout: fixed; to allow cells to adjust based on content */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.9em;
+  /* Remove overflow, text-overflow, white-space to allow content to wrap */
+}
+
+th {
+  background-color: #333;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Ensure buttons don't have too much padding */
+button {
+  padding: 5px 10px; /* Reduced padding */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85em;
+}
+
+/* Ensure the delete button is not too large */
+button.delete-button {
+  background-color: transparent;
+  color: #333;
+  border: none;
+}
+
+/* Styles for the add button */
+button.add-button {
+  background-color: #333;
+  color: white;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* Adjust the input text size */
+input[type="text"] {
+  width: calc(100% - 14px); /* Adjust width to account for padding */
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: block; /* Ensure it takes the full width */
+}
+
+/* Style adjustments for confirmation and cancellation buttons */
+.confirm-delete-button, .cancel-button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.8em;
+  color: white;
+  font-weight: bold;
+}
+
+.confirm-delete-button {
+  background-color: #dc3545;
+}
+
+.confirm-delete-button:hover {
+  background-color: #c82333;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+/* This class is for the cell that contains the action buttons */
+.action-cell {
+  white-space: normal; /* Allows button text to wrap if needed */
+  padding: 10px; /* Same padding as other cells for consistency */
+}
+
+.delete-button:hover .fa-trash {
+  color: #dc3545; /* Change icon color to red on hover */
+}
+
+.fa-trash {
+  color: inherit;
+}

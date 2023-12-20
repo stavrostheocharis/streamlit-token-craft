@@ -1,7 +1,7 @@
 # 🌟 Streamlit Token Craft Component 🚀
 
-[![GitHub][github_badge]][github_link] [![PyPI][pypi_badge]][pypi_link] [![Download][download_badge]][download_link] [![Licence][licence_badge]][licence_link]
-
+[![Open in Streamlit][share_badge]][share_link] [![GitHub][github_badge]][github_link] [![PyPI][pypi_badge]][pypi_link] [![Download][download_badge]][download_link] [![Licence][licence_badge]][licence_link]
+ 
 Welcome to the Streamlit Token Craft Component, where managing tokens is as fun as a barrel of monkeys! 🐒 This custom Streamlit component is designed to bring joy and efficiency to your data management needs of displaying tokens in your Streamlit app.
 
 ## Features 🎉
@@ -14,9 +14,15 @@ Welcome to the Streamlit Token Craft Component, where managing tokens is as fun 
 
 Watch the Token Craft strut its stuff!
 
+### Basic demo
+![image_demo_!](demo.gif)
+
+You can also find the [deployed example app](https://app-token-craft-example.streamlit.app/) in streamlit's community cloud!
 
 Peek at more cool tricks up its sleeve!
 
+### Secondary demo
+![image_demo_!](demo_column_selection.gif)
 
 ## Installation 🛠️
 Get this party started with a simple command:
@@ -63,6 +69,9 @@ This project is licenced under an [MIT Licence](LICENSE).
 
 
 
+[share_badge]: https://static.streamlit.io/badges/streamlit_badge_black_white.svg
+
+[share_link]: https://app-token-craft-example.streamlit.app/
 
 [github_badge]: https://badgen.net/badge/icon/GitHub?icon=github&color=black&label
 
@@ -79,3 +88,4 @@ This project is licenced under an [MIT Licence](LICENSE).
 [licence_badge]: https://img.shields.io/github/license/stavrostheocharis/streamlit-token-craft
 
 [licence_link]: LICENSE
+

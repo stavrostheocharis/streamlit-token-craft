@@ -1,8 +1,8 @@
 import streamlit as st
 import demo_mock_token_service as mts
-from token_manager import st_token_table
+from token_craft import st_token_table
 
-st.header("Token manager example")
+st.header("Token craft example")
 
 column_visibility_settings = {
     "name": st.sidebar.checkbox("Show Name", True),

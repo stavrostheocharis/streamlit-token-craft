@@ -1,8 +1,8 @@
-# 🌟 Streamlit Token Manager Component 🚀
+# 🌟 Streamlit Token Craft Component 🚀
 
 [![GitHub][github_badge]][github_link] [![PyPI][pypi_badge]][pypi_link] [![Download][download_badge]][download_link]
 
-Welcome to the Streamlit Token Manager Component, where managing tokens is as fun as a barrel of monkeys! 🐒 This custom Streamlit component is designed to bring joy and efficiency to your data management needs of displaying tokens in your Streamlit app.
+Welcome to the Streamlit Token Craft Component, where managing tokens is as fun as a barrel of monkeys! 🐒 This custom Streamlit component is designed to bring joy and efficiency to your data management needs of displaying tokens in your Streamlit app.
 
 ## Features 🎉
 * Inline Editing: Edit tokens directly in the table like a ninja! 🥷
@@ -12,7 +12,7 @@ Welcome to the Streamlit Token Manager Component, where managing tokens is as fu
 
 ## Demo 📺
 
-Watch the Token Manager strut its stuff!
+Watch the Token Craft strut its stuff!
 
 
 Peek at more cool tricks up its sleeve!
@@ -21,15 +21,15 @@ Peek at more cool tricks up its sleeve!
 ## Installation 🛠️
 Get this party started with a simple command:
 ```python
-pip install streamlit-token-manager
+pip install streamlit-token-craft
 ```
 
 ## Usage 📚
-Here’s a very simple example on how to unleash the power of the Token Manager in your app:
+Here’s a very simple example on how to unleash the power of the Token Craft in your app:
 
 ```python
 import streamlit as st
-from token_manager import st_token_table
+from token_craft import st_token_table
 
 mock_tokens = [
     {
@@ -60,3 +60,18 @@ For more information, see [CONTRIBUTING](CONTRIBUTING.md) instructions.
 
 ## License 📜
 This project is licenced under an [MIT Licence](LICENSE).
+
+
+
+
+[github_badge]: https://badgen.net/badge/icon/GitHub?icon=github&color=black&label
+
+[github_link]: https://github.com/stavrostheocharis/streamlit-token-craft
+
+[pypi_badge]: 
+
+[pypi_link]: 
+
+[download_badge]: 
+
+[download_link]: 

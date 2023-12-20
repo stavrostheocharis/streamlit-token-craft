@@ -25,6 +25,7 @@ th, td {
 th {
   background-color: #fafafa; /* Lighter header color */
   color: #333; /* Darker font color for contrast */
+  position: relative; /* Needed for absolute positioning of tooltip */
 }
 
 tr:nth-child(even) {
@@ -112,4 +113,20 @@ input[type="text"] {
 
 button.delete-button .fa-trash {
   transition: color 0.3s ease;
+}
+/* Custom tooltip styling */
+th[data-tooltip]:hover::after, td[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  padding: 2px 6px; /* Reduced padding for a tighter look */
+  top: 100%; /* Position below the cell */
+  left: 50%; /* Start from the middle of the cell */
+  transform: translateX(-50%) translateY(4px); /* Center below the cell */
+  white-space: nowrap;
+  z-index: 1000; /* Ensure it's above other elements */
+  background-color: #555; /* Darker background for a sleek look */
+  color: white;
+  border-radius: 2px; /* Smaller border radius for a sharper look */
+  font-size: 0.7em; /* Smaller font size */
+  pointer-events: none; /* Ignore mouse events */
 }

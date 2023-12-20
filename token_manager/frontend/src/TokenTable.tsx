@@ -3,6 +3,7 @@ import { Streamlit, withStreamlitConnection, ComponentProps } from "streamlit-co
 import './TokenTable.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import ReactTooltip from 'react-tooltip';
 
 interface EditableCellProps {
   value: string;
@@ -110,7 +111,7 @@ const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
             <th>Name</th>
             <th>Key</th>
             <th>Date Created</th>
-            <th>Last Used</th>
+            <th data-tooltip="The last time this key was used.">Last Used</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -146,6 +147,7 @@ const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
       </table>
     </div>
   );
+  
 };
 
 export default withStreamlitConnection(TokenTable);

@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="token_craft",
+    name="streamlit-token_craft",
     version="0.1.0",
     author="Stavros Theocharis",
     author_email="stavrostheocharis@yahoo.gr",

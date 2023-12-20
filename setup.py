@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="streamlit-token_craft",
-    version="0.1.1",
+    version="0.1.2",
     author="Stavros Theocharis",
     author_email="stavrostheocharis@yahoo.gr",
     description="streamlit custom token craft and management component",

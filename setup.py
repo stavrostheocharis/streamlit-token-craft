@@ -11,7 +11,7 @@ setuptools.setup(
     description="streamlit custom token manager component",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/stavrostheocharis/streamlit-token-manager",
+    url="https://github.com/stavrostheocharis/streamlit-token-craft",
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[

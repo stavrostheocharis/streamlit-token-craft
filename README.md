@@ -21,7 +21,7 @@ Peek at more cool tricks up its sleeve!
 ## Installation 🛠️
 Get this party started with a simple command:
 ```python
-pip install streamlit-token-manager
+pip install streamlit-token-craft
 ```
 
 ## Usage 📚
@@ -29,7 +29,7 @@ Here’s a very simple example on how to unleash the power of the Token Manager 
 
 ```python
 import streamlit as st
-from token_manager import st_token_table
+from token_craft import st_token_table
 
 mock_tokens = [
     {
@@ -60,3 +60,18 @@ For more information, see [CONTRIBUTING](CONTRIBUTING.md) instructions.
 
 ## License 📜
 This project is licenced under an [MIT Licence](LICENSE).
+
+
+
+
+[github_badge]: https://badgen.net/badge/icon/GitHub?icon=github&color=black&label
+
+[github_link]: https://github.com/stavrostheocharis/streamlit-token-craft
+
+[pypi_badge]: 
+
+[pypi_link]: 
+
+[download_badge]: 
+
+[download_link]: 

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Streamlit, withStreamlitConnection, ComponentProps } from "streamlit-component-lib";
 import './TokenTable.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import ReactTooltip from 'react-tooltip';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface EditableCellProps {
   value: string;
@@ -74,7 +73,7 @@ interface TokenTableProps extends ComponentProps {
 }
 
 const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
-  const { tokens, columnVisibility } = args;
+  const { columnVisibility } = args;
   const [pendingDeletion, setPendingDeletion] = useState<string | null>(null);
   const [tokenList, setTokenList] = useState<Token[]>(args.tokens || []);
 

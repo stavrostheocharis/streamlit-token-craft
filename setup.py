@@ -4,11 +4,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="token_manager",
+    name="token_craft",
     version="0.1.0",
     author="Stavros Theocharis",
     author_email="stavrostheocharis@yahoo.gr",
-    description="streamlit custom token manager component",
+    description="streamlit custom token craft and management component",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/stavrostheocharis/streamlit-token-craft",
@@ -19,7 +19,14 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    keywords=["Python", "Streamlit", "React", "JavaScript", "token manager"],
+    keywords=[
+        "Python",
+        "Streamlit",
+        "React",
+        "JavaScript",
+        "token craft",
+        "token manager",
+    ],
     python_requires=">=3.9",
     install_requires=[
         "streamlit >= 1.29.0",

@@ -1,8 +1,8 @@
-# 🌟 Streamlit Token Manager Component 🚀
+# 🌟 Streamlit Token Craft Component 🚀
 
 [![GitHub][github_badge]][github_link] [![PyPI][pypi_badge]][pypi_link] [![Download][download_badge]][download_link]
 
-Welcome to the Streamlit Token Manager Component, where managing tokens is as fun as a barrel of monkeys! 🐒 This custom Streamlit component is designed to bring joy and efficiency to your data management needs of displaying tokens in your Streamlit app.
+Welcome to the Streamlit Token Craft Component, where managing tokens is as fun as a barrel of monkeys! 🐒 This custom Streamlit component is designed to bring joy and efficiency to your data management needs of displaying tokens in your Streamlit app.
 
 ## Features 🎉
 * Inline Editing: Edit tokens directly in the table like a ninja! 🥷
@@ -12,7 +12,7 @@ Welcome to the Streamlit Token Manager Component, where managing tokens is as fu
 
 ## Demo 📺
 
-Watch the Token Manager strut its stuff!
+Watch the Token Craft strut its stuff!
 
 
 Peek at more cool tricks up its sleeve!
@@ -25,7 +25,7 @@ pip install streamlit-token-craft
 ```
 
 ## Usage 📚
-Here’s a very simple example on how to unleash the power of the Token Manager in your app:
+Here’s a very simple example on how to unleash the power of the Token Craft in your app:
 
 ```python
 import streamlit as st

@@ -1,6 +1,6 @@
 import streamlit as st
 import mock_token_service as mts
-from testo import st_token_table
+from token_manager import st_token_table
 
 
 # State variable to control whether the "new key" form should be shown

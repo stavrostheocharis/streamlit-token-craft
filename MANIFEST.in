@@ -1,0 +1,1 @@
+recursive-include token_manager/frontend/build *

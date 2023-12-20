@@ -1,109 +1,132 @@
 .token-table-container {
-  width: 100%; /* Adjust the width as needed */
-  overflow-x: auto; /* Allows horizontal scrolling if needed */
+  width: 100%;
+  overflow-x: auto;
+  font-family: 'Roboto', sans-serif; /* Use a modern font */
 }
 
 .token-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; /* Use separate to be able to round corners */
+  border-spacing: 0;
   margin-top: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-  /* Remove table-layout: fixed; to allow cells to adjust based on content */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  background-color: white;
+  border-radius: 8px; /* Round corners */
+  overflow: hidden; /* Ensures the rounded corners include children */
 }
 
 th, td {
-  border: 1px solid #ddd;
-  padding: 10px;
+  border-bottom: 1px solid #eaeaea; /* Lighter border color */
+  padding: 12px 15px; /* More space */
   text-align: left;
-  font-size: 0.9em;
-  /* Remove overflow, text-overflow, white-space to allow content to wrap */
+  font-size: 0.95em;
 }
 
 th {
-  background-color: #333;
-  color: white;
+  background-color: #fafafa; /* Lighter header color */
+  color: #333; /* Darker font color for contrast */
+  position: relative; /* Needed for absolute positioning of tooltip */
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f9f9f9; /* Very subtle stripe */
 }
 
-/* Ensure buttons don't have too much padding */
+tr:hover {
+  background-color: #f0f0f0; /* Hover effect for each row */
+}
+
 button {
-  padding: 5px 10px; /* Reduced padding */
+  padding: 8px 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 0.85em;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effects */
+  margin-right: 5px; /* Space between buttons */
 }
 
-/* Ensure the delete button is not too large */
 button.delete-button {
-  background-color: transparent;
-  color: #333;
-  border: none;
+  background-color: transparent; /* No background for a minimalistic look */
+  color: #bbb; /* Light grey color for the icon */
+  font-size: 0.75em; /* Smaller icon */
+  padding: 5px; /* Reduced padding */
 }
 
-/* Styles for the add button */
+button.delete-button:hover {
+  color: #ff4757; /* Red color on hover for attention */
+}
+
 button.add-button {
-  background-color: #333;
+  background-color: #2ed573; /* Green color for add button */
   color: white;
-  padding: 7px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.85em;
-  margin-bottom: 10px;
-  text-align: left;
 }
 
-/* Adjust the input text size */
+button.add-button:hover {
+  background-color: #55efc4; /* Lighter green on hover */
+}
+
 input[type="text"] {
-  width: calc(100% - 14px); /* Adjust width to account for padding */
-  padding: 7px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  display: block; /* Ensure it takes the full width */
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding in width */
 }
 
-/* Style adjustments for confirmation and cancellation buttons */
 .confirm-delete-button, .cancel-button {
-  padding: 5px 10px;
+  padding: 5px 7px;
   margin-right: 5px;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 0.8em;
   color: white;
   font-weight: bold;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effects */
 }
 
 .confirm-delete-button {
-  background-color: #dc3545;
+  background-color: #ff4757; /* Red color for confirm delete */
 }
 
 .confirm-delete-button:hover {
-  background-color: #c82333;
+  background-color: #ff6b81; /* Lighter red on hover */
 }
 
 .cancel-button {
-  background-color: #6c757d;
+  background-color: #576574; /* Dark grey for cancel button */
 }
 
 .cancel-button:hover {
-  background-color: #5a6268;
+  background-color: #6c757d; /* Lighter grey on hover */
 }
 
-/* This class is for the cell that contains the action buttons */
 .action-cell {
-  white-space: normal; /* Allows button text to wrap if needed */
-  padding: 10px; /* Same padding as other cells for consistency */
-}
-
-.delete-button:hover .fa-trash {
-  color: #dc3545; /* Change icon color to red on hover */
+  white-space: nowrap; /* Keep actions in one line */
 }
 
 .fa-trash {
   color: inherit;
+  font-size: 0.9em; 
+}
+
+button.delete-button .fa-trash {
+  transition: color 0.3s ease;
+}
+/* Custom tooltip styling */
+th[data-tooltip]:hover::after, td[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  padding: 2px 6px; /* Reduced padding for a tighter look */
+  top: 100%; /* Position below the cell */
+  left: 50%; /* Start from the middle of the cell */
+  transform: translateX(-50%) translateY(4px); /* Center below the cell */
+  white-space: nowrap;
+  z-index: 1000; /* Ensure it's above other elements */
+  background-color: #555; /* Darker background for a sleek look */
+  color: white;
+  border-radius: 2px; /* Smaller border radius for a sharper look */
+  font-size: 0.7em; /* Smaller font size */
+  pointer-events: none; /* Ignore mouse events */
 }

@@ -57,13 +57,23 @@ interface Token {
   is_active: boolean;
 }
 
+interface ColumnVisibility {
+  name: boolean;
+  key: boolean;
+  dateCreated: boolean;
+  lastUsed: boolean;
+  actions: boolean;
+}
+
 interface TokenTableProps extends ComponentProps {
   args: {
     tokens: Token[];
+    columnVisibility: ColumnVisibility; // Add this line
   };
 }
 
 const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
+  const { columnVisibility } = args;
   const [pendingDeletion, setPendingDeletion] = useState<string | null>(null);
   const [tokenList, setTokenList] = useState<Token[]>(args.tokens || []);
 
@@ -107,45 +117,49 @@ const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
       <table className="token-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Key</th>
-            <th>Date Created</th>
-            <th>Last Used</th>
-            <th>Actions</th>
+            {columnVisibility.name && <th>Name</th>}
+            {columnVisibility.key && <th>Key</th>}
+            {columnVisibility.dateCreated && <th>Date Created</th>}
+            {columnVisibility.lastUsed && <th data-tooltip="The last time this key was used.">Last Used</th>}
+            {columnVisibility.actions && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
           {tokenList.map((token, index) => (
             <tr key={index}>
-              <EditableCell
-                value={token.name}
-                onValueChange={(value) => handleValueChange(token.key, 'name', value)}
-              />
-              <td>{token.key}</td>
-              <td>{token.dateCreated}</td>
-              <td>{token.lastUsed}</td>
-              <td>
-                {pendingDeletion === token.key ? (
-                  <>
-                    <button onClick={confirmDelete} className="confirm-delete-button">
-                      Confirm Revoke
+              {columnVisibility.name && (
+                <EditableCell
+                  value={token.name}
+                  onValueChange={(value) => handleValueChange(token.key, 'name', value)}
+                />
+              )}
+              {columnVisibility.key && <td>{token.key}</td>}
+              {columnVisibility.dateCreated && <td>{token.dateCreated}</td>}
+              {columnVisibility.lastUsed && <td>{token.lastUsed}</td>}
+              {columnVisibility.actions && (
+                <td>
+                  {pendingDeletion === token.key ? (
+                    <>
+                      <button onClick={confirmDelete} className="confirm-delete-button">
+                        Confirm Revoke
+                      </button>
+                      <button onClick={cancelDelete} className="cancel-button">
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <button onClick={() => handleDeleteClick(token.key)} className="delete-button">
+                      <FontAwesomeIcon icon={faTrash} />
                     </button>
-                    <button onClick={cancelDelete} className="cancel-button">
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  <button onClick={() => handleDeleteClick(token.key)} className="delete-button">
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                )}
-              </td>
+                  )}
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  );
+  );  
 };
 
 export default withStreamlitConnection(TokenTable);

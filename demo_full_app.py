@@ -1,6 +1,7 @@
 import streamlit as st
-import mock_token_service as mts
+import demo_mock_token_service as mts
 from token_manager import st_token_table
+
 
 # Initialize session state keys if they don't exist
 for key in [
@@ -27,8 +28,8 @@ def reset_state(
         {
             "show_basic_key": show_basic_key,
             "show_add_key_form": show_add_key_form,
-            "show_success_message": show_success_message,
             "show_table": show_table,
+            "show_success_message": show_success_message,
         }
     )
     st.rerun()
@@ -65,27 +66,28 @@ if st.session_state["show_add_key_form"]:
                 st.session_state[
                     "success_message"
                 ] = f"New secret key created successfully! Key: {new_token['key']}"
-                reset_state(show_success_message=True, show_add_key_form=False)
+                # st.session_state["show_success_message"] = True
+                reset_state(
+                    show_basic_key=False,
+                    show_success_message=True,
+                    show_table=False,
+                )
             else:
                 st.warning("Please enter a name for the key.")
         elif cancel_button:
-            st.session_state["show_basic_key"] = True
             reset_state()
 
 
 # Show a success message if a new key was added
 if st.session_state["show_success_message"]:
-    reset_state(show_add_key_form=False, show_basic_key=True)
     container = st.container(border=True)
     container.write(
         "Stash this secret key in a super safe yet reachable hidey-hole! It's like a one-off magic ticket – once gone from here, it's gone for good. Lose it, and you're off to the wizarding world of making a new one! 🗝️✨🧙‍♂️"
     )
     container.success(st.session_state["success_message"])
-
     # 'OK' button to reset the success state
-    if st.button("OK"):
-        reset_state()
-
+    if container.button("OK"):
+        reset_state(show_success_message=False)
 
 if st.session_state["show_table"]:
     # Display the keys in the table with the hashed version
@@ -118,5 +120,3 @@ if st.session_state["show_table"]:
 
         if needs_rerun:
             st.rerun()
-
-    print("Current tokens in mock DB:", mts._token_db)

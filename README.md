@@ -83,7 +83,7 @@ This project is licenced under an [MIT Licence](LICENSE).
 
 [download_badge]: https://badgen.net/pypi/dm/streamlit-token-craft
 
-[download_link]: https://pypi.org/project/streamlit-token-craft/0.1.1/#files
+[download_link]: https://pypi.org/project/streamlit-token-craft/#files
 
 [licence_badge]: https://img.shields.io/github/license/stavrostheocharis/streamlit-token-craft
 

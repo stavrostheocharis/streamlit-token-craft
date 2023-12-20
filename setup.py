@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.1.0",
     author="Stavros Theocharis",
     author_email="stavrostheocharis@yahoo.gr",
-    description="",
+    description="streamlit custom token manager component",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="",

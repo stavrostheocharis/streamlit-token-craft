@@ -6,6 +6,14 @@ _component_func = components.declare_component(
 )
 
 
-# Define a function to render your component in Streamlit
-def st_token_table(tokens, column_help_text=None, key=None):
-    return _component_func(tokens=tokens, column_help_text=column_help_text, key=key)
+def st_token_table(tokens, column_visibility=None, key=None):
+    # Set default visibility if none provided
+    if column_visibility is None:
+        column_visibility = {
+            "name": True,
+            "key": True,
+            "dateCreated": True,
+            "lastUsed": True,
+            "actions": True,
+        }
+    return _component_func(tokens=tokens, columnVisibility=column_visibility, key=key)

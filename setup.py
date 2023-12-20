@@ -11,7 +11,7 @@ setuptools.setup(
     description="streamlit custom token manager component",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/stavrostheocharis/streamlit-token-manager",
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[
@@ -19,7 +19,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    keywords=["Python", "Streamlit", "React", "JavaScript"],
+    keywords=["Python", "Streamlit", "React", "JavaScript", "token manager"],
     python_requires=">=3.9",
     install_requires=[
         "streamlit >= 1.29.0",

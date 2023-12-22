@@ -1,6 +1,6 @@
 # How to contribute ✨
 
-Hello, creative minds and code wizards! Your innovative ideas, bug-fixing spells, and insightful suggestions are not just welcome here – they're the secret ingredients that make this project shine! If you've got a spellbinding change in mind, wave your wand and create an [issue]() to share your vision.
+Hello, creative minds and code wizards! Your innovative ideas, bug-fixing spells, and insightful suggestions are not just welcome here – they're the secret ingredients that make this project shine! If you've got a spellbinding change in mind, wave your wand and create an [issue](https://github.com/stavrostheocharis/streamlit-token-craft/issues) to share your vision.
 
 ## Workflow
 

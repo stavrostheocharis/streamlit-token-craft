@@ -68,14 +68,29 @@ interface ColumnVisibility {
 interface TokenTableProps extends ComponentProps {
   args: {
     tokens: Token[];
-    columnVisibility: ColumnVisibility; // Add this line
+    columnVisibility: ColumnVisibility;
+    theme?: {
+      base: 'light' | 'dark';
+      primaryColor: string;
+      backgroundColor: string;
+      secondaryBackgroundColor: string;
+      textColor: string;
+      font: string;
+    };
   };
 }
+
 
 const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
   const { columnVisibility } = args;
   const [pendingDeletion, setPendingDeletion] = useState<string | null>(null);
   const [tokenList, setTokenList] = useState<Token[]>(args.tokens || []);
+  const { theme } = args;
+  const currentTheme = theme?.base || 'light';
+
+  useEffect(() => {
+    // Handle theme change if necessary
+  }, [args.theme]);
 
   useEffect(() => {
     setTokenList(args.tokens || []);
@@ -113,7 +128,7 @@ const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
   };
 
   return (
-    <div className="token-table-container">
+    <div className={`token-table-container ${currentTheme}`}>
       <table className="token-table">
         <thead>
           <tr>

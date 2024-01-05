@@ -112,8 +112,8 @@ th[data-tooltip]:hover::after, td[data-tooltip]:hover::after {
   pointer-events: none; /* Ignore mouse events */
 }
 
-/* TODO: Need to identify the streamlit theme to add colours and hovers */
-/* 
+/* Custom colours based on theme */
+
 .light th {
   background-color: #fafafa; 
   color: #333; 
@@ -127,16 +127,16 @@ th[data-tooltip]:hover::after, td[data-tooltip]:hover::after {
 
 
 .dark th {
-  background-color: #444; 
+  background-color: #555; 
   color: white; 
 }
 
 .dark tr:nth-child(even) {
-  background-color: #383838; 
+  background-color: #404040; 
 }
 
 .dark  tr:hover {
-  background-color: #2c2c2c; 
-  } */
+  background-color: #333; 
+  }
 
   

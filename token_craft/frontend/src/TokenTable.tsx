@@ -81,13 +81,10 @@ interface TokenTableProps extends ComponentProps {
 }
 
 
-const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
+const TokenTable: React.FC<TokenTableProps> = ({ args, theme }) => {
   const { columnVisibility } = args;
   const [pendingDeletion, setPendingDeletion] = useState<string | null>(null);
   const [tokenList, setTokenList] = useState<Token[]>(args.tokens || []);
-  const { theme } = args;
-  const currentTheme = theme?.base || 'light';
-
   useEffect(() => {
     // Handle theme change if necessary
   }, [args.theme]);
@@ -128,7 +125,7 @@ const TokenTable: React.FC<TokenTableProps> = ({ args }) => {
   };
 
   return (
-    <div className={`token-table-container ${currentTheme}`}>
+    <div className={`token-table-container ${theme?.base}`}>
       <table className="token-table">
         <thead>
           <tr>
